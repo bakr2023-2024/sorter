@@ -12,6 +12,8 @@ public class Sorter {
                 insertionSort(arr);
             case MERGE_SORT:
                 mergeSort(arr, 0, arr.length - 1);
+            case QUICK_SORT:
+                quickSort(arr, 0, arr.length - 1);
             default:
                 break;
         }
@@ -34,7 +36,7 @@ public class Sorter {
                     idx = j;
                 }
             }
-            if (idx != 0)
+            if (idx != i)
                 swap(arr, i, idx);
         }
     }
@@ -76,7 +78,7 @@ public class Sorter {
             b[i] = arr[m + i + 1];
         int i = 0, j = 0, k = s;
         while (i < l1 && j < l2) {
-            if (a[i] < b[j])
+            if (a[i] <= b[j])
                 arr[k++] = a[i++];
             else
                 arr[k++] = b[j++];
@@ -96,4 +98,24 @@ public class Sorter {
         }
     }
 
+    private int partition(int arr[], int s, int e) {
+        int pivot = arr[e];
+        int i = s - 1;
+        for (int j = s; j < e; j++) {
+            if (arr[j] < pivot) {
+                i++;
+                swap(arr, i, j);
+            }
+        }
+        swap(arr, e, i + 1);
+        return i + 1;
+    }
+
+    private void quickSort(int arr[], int s, int e) {
+        if (s < e) {
+            int p = partition(arr, s, e);
+            quickSort(arr, s, p - 1);
+            quickSort(arr, p + 1, e);
+        }
+    }
 }
