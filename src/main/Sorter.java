@@ -184,9 +184,9 @@ public class Sorter {
     }
 
     private void radixSort(int[] arr) {
-        int d = (int) (Math.log10(max(arr)) + 1);
-        for (int i = 0; i < d; i++)
-            countSort(arr, (int) Math.pow(10, i));
+        int max = max(arr);
+        for (int exp = 1; max / exp > 0; exp *= 10)
+            countSort(arr, exp);
     }
 
     private void heapify(int[] arr, int i, int n) {
