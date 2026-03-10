@@ -8,6 +8,8 @@ public class Sorter {
                 break;
             case BUBBLE_SORT:
                 bubbleSort(arr);
+            case INSERTION_SORT:
+                insertionSort(arr);
             default:
                 break;
         }
@@ -46,6 +48,18 @@ public class Sorter {
             }
             if (!swapped)
                 break;
+        }
+    }
+
+    private void insertionSort(int[] arr) {
+        for (int i = 1; i < arr.length; i++) {
+            int j = i;
+            int curr = arr[j];
+            while (j > 0 && arr[j - 1] > curr) {
+                arr[j] = arr[j - 1];
+                j--;
+            }
+            arr[j] = curr;
         }
     }
 }
