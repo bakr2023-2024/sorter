@@ -6,7 +6,8 @@ public class Sorter {
             case SELECTION_SORT:
                 selectionSort(arr);
                 break;
-
+            case BUBBLE_SORT:
+                bubbleSort(arr);
             default:
                 break;
         }
@@ -31,6 +32,20 @@ public class Sorter {
             }
             if (idx != 0)
                 swap(arr, i, idx);
+        }
+    }
+
+    private void bubbleSort(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            boolean swapped = false;
+            for (int j = 0; j < arr.length - 1 - i; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    swap(arr, j, j + 1);
+                    swapped = true;
+                }
+            }
+            if (!swapped)
+                break;
         }
     }
 }
