@@ -10,6 +10,8 @@ public class Sorter {
                 bubbleSort(arr);
             case INSERTION_SORT:
                 insertionSort(arr);
+            case MERGE_SORT:
+                mergeSort(arr, 0, arr.length - 1);
             default:
                 break;
         }
@@ -62,4 +64,36 @@ public class Sorter {
             arr[j] = curr;
         }
     }
+
+    private void merge(int[] arr, int s, int m, int e) {
+        int l1 = m - s + 1;
+        int l2 = e - m;
+        int[] a = new int[l1];
+        int[] b = new int[l2];
+        for (int i = 0; i < l1; i++)
+            a[i] = arr[s + i];
+        for (int i = 0; i < l2; i++)
+            b[i] = arr[m + i + 1];
+        int i = 0, j = 0, k = s;
+        while (i < l1 && j < l2) {
+            if (a[i] < b[j])
+                arr[k++] = a[i++];
+            else
+                arr[k++] = b[j++];
+        }
+        while (i < l1)
+            arr[k++] = a[i++];
+        while (j < l2)
+            arr[k++] = b[j++];
+    }
+
+    private void mergeSort(int[] arr, int s, int e) {
+        if (s < e) {
+            int m = (e - s) / 2 + s;
+            mergeSort(arr, s, m);
+            mergeSort(arr, m + 1, e);
+            merge(arr, s, m, e);
+        }
+    }
+
 }
