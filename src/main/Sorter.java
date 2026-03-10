@@ -20,6 +20,8 @@ public class Sorter {
                 countSort(arr);
             case RADIX_SORT:
                 radixSort(arr);
+            case HEAP_SORT:
+                heapSort(arr);
             default:
                 break;
         }
@@ -185,5 +187,27 @@ public class Sorter {
         int d = (int) (Math.log10(max(arr)) + 1);
         for (int i = 0; i < d; i++)
             countSort(arr, (int) Math.pow(10, i));
+    }
+
+    private void heapify(int[] arr, int i, int n) {
+        int largest = i;
+        int l = i * 2 + 1, r = i * 2 + 2;
+        if (l < n && arr[largest] < arr[l])
+            largest = l;
+        if (r < n && arr[largest] < arr[r])
+            largest = r;
+        if (largest != i) {
+            swap(arr, i, largest);
+            heapify(arr, largest, n);
+        }
+    }
+
+    private void heapSort(int[] arr) {
+        for (int i = (arr.length / 2) - 1; i >= 0; i--)
+            heapify(arr, i, arr.length);
+        for (int i = arr.length - 1; i >= 0; i--) {
+            swap(arr, 0, i);
+            heapify(arr, 0, i);
+        }
     }
 }

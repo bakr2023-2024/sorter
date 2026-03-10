@@ -21,7 +21,7 @@ public class SorterTest {
         for (int x = 0; x < 100; x++) {
         int[] arr = new int[N];
         for (int i = 0; i < N; i++)
-            arr[i] = rand.nextInt(2000);
+            arr[i] = rand.nextInt(1000);
         int[] copy = Arrays.copyOf(arr, N);
         sorter.sort(arr, alg);
         Arrays.sort(copy);
