@@ -18,6 +18,8 @@ public class Sorter {
                 shellSort(arr);
             case COUNT_SORT:
                 countSort(arr);
+            case RADIX_SORT:
+                radixSort(arr);
             default:
                 break;
         }
@@ -161,5 +163,27 @@ public class Sorter {
         }
         for (int i = 0; i < arr.length; i++)
             arr[i] = ans[i];
+    }
+
+    private void countSort(int[] arr, int exp) {
+        int[] freq = new int[10];
+        for (int i = 0; i < arr.length; i++)
+            freq[(arr[i] / exp) % 10]++;
+        for (int i = 1; i < freq.length; i++)
+            freq[i] += freq[i - 1];
+        int[] ans = new int[arr.length];
+        for (int i = arr.length - 1; i >= 0; i--) {
+            int val = (arr[i] / exp) % 10;
+            ans[freq[val] - 1] = arr[i];
+            freq[val]--;
+        }
+        for (int i = 0; i < arr.length; i++)
+            arr[i] = ans[i];
+    }
+
+    private void radixSort(int[] arr) {
+        int d = (int) (Math.log10(max(arr)) + 1);
+        for (int i = 0; i < d; i++)
+            countSort(arr, (int) Math.pow(10, i));
     }
 }
