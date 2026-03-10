@@ -1,0 +1,12 @@
+{
+  "java.project.sourcePaths": ["src"],
+  "java.project.outputPath": "bin",
+  "java.project.referencedLibraries": [
+    "lib/**/*.jar",
+    "d:\\javaLibs\\javafx-sdk-23.0.1\\lib\\javafx.base.jar",
+    "d:\\javaLibs\\javafx-sdk-23.0.1\\lib\\javafx.controls.jar",
+    "d:\\javaLibs\\javafx-sdk-23.0.1\\lib\\javafx.graphics.jar",
+    "d:\\javaLibs\\javafx-sdk-23.0.1\\lib\\javafx.media.jar",
+    "d:\\javaLibs\\junit5\\junit-platform-console-standalone-1.11.4.jar"
+  ]
+}

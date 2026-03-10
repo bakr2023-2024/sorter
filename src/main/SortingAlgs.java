@@ -1,0 +1,23 @@
+package main;
+
+public enum SortingAlgs {
+    SELECTION_SORT,
+    BUBBLE_SORT,
+    INSERTION_SORT,
+    MERGE_SORT,
+    QUICK_SORT,
+    SHELL_SORT,
+    COUNT_SORT,
+    RADIX_SORT,
+    HEAP_SORT,
+    COMB_SORT,
+    CYCLE_SORT,
+    COCKTAIL_SORT,
+    BITONIC_SORT,
+    PANCAKE_SORT,
+    CIRCLE_SORT,
+    STOOGE_SORT,
+    ODDEVEN_SORT,
+    GNOME_SORT,
+    BOGO_SORT
+}
