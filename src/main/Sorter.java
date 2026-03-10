@@ -16,6 +16,8 @@ public class Sorter {
                 quickSort(arr, 0, arr.length - 1);
             case SHELL_SORT:
                 shellSort(arr);
+            case COUNT_SORT:
+                countSort(arr);
             default:
                 break;
         }
@@ -28,6 +30,14 @@ public class Sorter {
         arr[j] = temp;
     }
 
+    private int max(int[] arr) {
+        int max = Integer.MIN_VALUE;
+        for (int i = 0; i < arr.length; i++) {
+            if (max < arr[i])
+                max = arr[i];
+        }
+        return max;
+    }
     private void selectionSort(int[] arr) {
         for (int i = 0; i < arr.length; i++) {
             int min = Integer.MAX_VALUE;
@@ -135,5 +145,21 @@ public class Sorter {
             }
             gap /= 2;
         }
+    }
+
+    private void countSort(int[] arr) {
+        int[] freq = new int[max(arr) + 1];
+        for (int i = 0; i < arr.length; i++)
+            freq[arr[i]]++;
+        for (int i = 1; i < freq.length; i++)
+            freq[i] += freq[i - 1];
+        int[] ans = new int[arr.length];
+        for (int i = arr.length - 1; i >= 0; i--) {
+            int val = arr[i];
+            ans[freq[val] - 1] = val;
+            freq[val]--;
+        }
+        for (int i = 0; i < arr.length; i++)
+            arr[i] = ans[i];
     }
 }

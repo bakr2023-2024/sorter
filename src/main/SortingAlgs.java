@@ -7,7 +7,7 @@ public enum SortingAlgs {
     MERGE_SORT,
     QUICK_SORT,
     SHELL_SORT,
-    // COUNT_SORT,
+    COUNT_SORT,
     // RADIX_SORT,
     // HEAP_SORT,
     // COMB_SORT,
