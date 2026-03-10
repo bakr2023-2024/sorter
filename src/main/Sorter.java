@@ -14,6 +14,8 @@ public class Sorter {
                 mergeSort(arr, 0, arr.length - 1);
             case QUICK_SORT:
                 quickSort(arr, 0, arr.length - 1);
+            case SHELL_SORT:
+                shellSort(arr);
             default:
                 break;
         }
@@ -116,6 +118,22 @@ public class Sorter {
             int p = partition(arr, s, e);
             quickSort(arr, s, p - 1);
             quickSort(arr, p + 1, e);
+        }
+    }
+
+    private void shellSort(int[] arr) {
+        int gap = arr.length / 2;
+        while (gap > 0) {
+            for (int i = gap; i < arr.length; i++) {
+                int j = i;
+                int curr = arr[j];
+                while ((j - gap) >= 0 && arr[j - gap] > curr) {
+                    arr[j] = arr[j - gap];
+                    j -= gap;
+                }
+                arr[j] = curr;
+            }
+            gap /= 2;
         }
     }
 }
