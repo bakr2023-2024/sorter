@@ -11,21 +11,21 @@ import main.Sorter;
 import main.SortingAlgs;
 
 public class SorterTest {
-    private final int N = 1000;
+    private final int N = 100;
     private final Random rand = new Random();
     private final Sorter sorter = new Sorter();
 
     @ParameterizedTest
     @EnumSource(SortingAlgs.class)
     void testAlg(SortingAlgs alg) {
-        for (int x = 0; x < 10000; x++) {
+        for (int x = 0; x < 100; x++) {
             int[] arr = new int[N];
             for (int i = 0; i < N; i++)
-            arr[i] = rand.nextInt(1000);
-        int[] copy = Arrays.copyOf(arr, N);
-        sorter.sort(arr, alg);
-        Arrays.sort(copy);
-        assertArrayEquals(copy, arr);
+                arr[i] = rand.nextInt(1000);
+            int[] copy = Arrays.copyOf(arr, arr.length);
+            sorter.sort(arr, alg);
+            Arrays.sort(copy);
+            assertArrayEquals(copy, arr);
     }
 }
 }

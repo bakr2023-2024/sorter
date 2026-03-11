@@ -24,6 +24,8 @@ public class Sorter {
                 heapSort(arr);
             case COMB_SORT:
                 combSort(arr);
+            case CYCLE_SORT:
+                cycleSort(arr);
             default:
                 break;
         }
@@ -229,5 +231,28 @@ public class Sorter {
                 }
             }
         } while (swapped);
+    }
+
+    private int cycle(int[] arr, int i) {
+        int pos = i;
+        for (int j = i + 1; j < arr.length; j++) {
+            if (arr[i] > arr[j])
+                pos++;
+        }
+        if (pos != i) {
+            while (arr[i] == arr[pos])
+                pos++;
+            swap(arr, i, pos);
+        }
+        return pos;
+    }
+
+    private void cycleSort(int[] arr) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            int pos = i;
+            do {
+                pos = cycle(arr, i);
+            } while (pos != i);
+        }
     }
 }
