@@ -38,6 +38,8 @@ public class Sorter {
                 bitonicSort(newArr, 0, len, true);
                 for (int i = 0; i < n; i++)
                     arr[i] = newArr[i];
+            case PANCAKE_SORT:
+                pancakeSort(arr);
             default:
                 break;
         }
@@ -57,6 +59,18 @@ public class Sorter {
                 max = arr[i];
         }
         return max;
+    }
+
+    private int maxIdx(int[] arr, int n) {
+        int max = Integer.MIN_VALUE;
+        int idx = 0;
+        for (int i = 0; i < n; i++) {
+            if (max < arr[i]) {
+                max = arr[i];
+                idx = i;
+            }
+        }
+        return idx;
     }
 
     private void selectionSort(int[] arr) {
@@ -306,6 +320,18 @@ public class Sorter {
             bitonicSort(arr, start, k, true);
             bitonicSort(arr, start + k, k, false);
             bitonicMerge(arr, start, count, asc);
+        }
+    }
+
+    private void flip(int[] arr, int mi) {
+        for (int i = 0, j = mi; i < j; i++, j--)
+            swap(arr, i, j);
+    }
+
+    private void pancakeSort(int[] arr) {
+        for (int size = arr.length; size > 1; size--) {
+            flip(arr, maxIdx(arr, size));
+            flip(arr, size - 1);
         }
     }
 }
