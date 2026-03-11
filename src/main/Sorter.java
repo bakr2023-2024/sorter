@@ -22,6 +22,8 @@ public class Sorter {
                 radixSort(arr);
             case HEAP_SORT:
                 heapSort(arr);
+            case COMB_SORT:
+                combSort(arr);
             default:
                 break;
         }
@@ -42,6 +44,7 @@ public class Sorter {
         }
         return max;
     }
+
     private void selectionSort(int[] arr) {
         for (int i = 0; i < arr.length; i++) {
             int min = Integer.MAX_VALUE;
@@ -209,5 +212,22 @@ public class Sorter {
             swap(arr, 0, i);
             heapify(arr, 0, i);
         }
+    }
+
+    private void combSort(int[] arr) {
+        int gap = arr.length;
+        boolean swapped = false;
+        do {
+            gap = (int) (gap / 1.3);
+            swapped = false;
+            if (gap < 1)
+                gap = 1;
+            for (int i = 0; i + gap < arr.length; i++) {
+                if (arr[i] > arr[i + gap]) {
+                    swap(arr, i, i + gap);
+                    swapped = true;
+                }
+            }
+        } while (swapped);
     }
 }

@@ -10,7 +10,7 @@ public enum SortingAlgs {
     COUNT_SORT,
     RADIX_SORT,
     HEAP_SORT,
-    // COMB_SORT,
+    COMB_SORT,
     // CYCLE_SORT,
     // COCKTAIL_SORT,
     // BITONIC_SORT,
