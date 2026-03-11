@@ -13,7 +13,7 @@ public enum SortingAlgs {
     COMB_SORT,
     CYCLE_SORT,
     COCKTAIL_SORT,
-    // BITONIC_SORT,
+    BITONIC_SORT,
     // PANCAKE_SORT,
     // CIRCLE_SORT,
     // STOOGE_SORT,

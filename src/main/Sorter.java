@@ -1,5 +1,7 @@
 package main;
 
+import java.util.Arrays;
+
 public class Sorter {
     public int[] sort(int[] arr, SortingAlgs alg) {
         switch (alg) {
@@ -28,6 +30,14 @@ public class Sorter {
                 cycleSort(arr);
             case COCKTAIL_SORT:
                 cocktailSort(arr);
+            case BITONIC_SORT:
+                int n = arr.length;
+                int len = (n & (n - 1)) == 0 ? n : Integer.highestOneBit(n) << 1;
+                int[] newArr = Arrays.copyOf(arr, len);
+                Arrays.fill(newArr, n, len, Integer.MAX_VALUE);
+                bitonicSort(newArr, 0, len, true);
+                for (int i = 0; i < n; i++)
+                    arr[i] = newArr[i];
             default:
                 break;
         }
@@ -275,6 +285,27 @@ public class Sorter {
             }
             if (!swapped)
                 break;
+        }
+    }
+
+    private void bitonicMerge(int[] arr, int start, int count, boolean asc) {
+        if (count > 1) {
+            int k = count / 2;
+            for (int i = start; i < start + k; i++) {
+                if (asc == (arr[i] > arr[i + k]))
+                    swap(arr, i, i + k);
+            }
+            bitonicMerge(arr, start, k, asc);
+            bitonicMerge(arr, start + k, k, asc);
+        }
+    }
+
+    private void bitonicSort(int[] arr, int start, int count, boolean asc) {
+        if (count > 1) {
+            int k = count / 2;
+            bitonicSort(arr, start, k, true);
+            bitonicSort(arr, start + k, k, false);
+            bitonicMerge(arr, start, count, asc);
         }
     }
 }
