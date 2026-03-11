@@ -26,6 +26,8 @@ public class Sorter {
                 combSort(arr);
             case CYCLE_SORT:
                 cycleSort(arr);
+            case COCKTAIL_SORT:
+                cocktailSort(arr);
             default:
                 break;
         }
@@ -253,6 +255,26 @@ public class Sorter {
             do {
                 pos = cycle(arr, i);
             } while (pos != i);
+        }
+    }
+
+    private void cocktailSort(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            boolean swapped = false;
+            for (int j = 0; j < arr.length - 1 - i; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    swap(arr, j, j + 1);
+                    swapped = true;
+                }
+            }
+            for (int j = arr.length - 1 - i; j > 0; j--) {
+                if (arr[j] < arr[j - 1]) {
+                    swap(arr, j, j - 1);
+                    swapped = true;
+                }
+            }
+            if (!swapped)
+                break;
         }
     }
 }
