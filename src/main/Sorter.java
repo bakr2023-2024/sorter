@@ -59,6 +59,9 @@ public class Sorter {
             case ODDEVEN_SORT:
                 oddEvenSort(arr);
                 break;
+            case GNOME_SORT:
+                gnomeSort(arr);
+                break;
             default:
                 break;
         }
@@ -382,5 +385,17 @@ public class Sorter {
                 }
             }
         } while (swapped);
+    }
+
+    private void gnomeSort(int[] arr) {
+        int i = 0;
+        while (i < arr.length) {
+            if (i == 0 || arr[i] >= arr[i - 1])
+                i++;
+            else if (arr[i] < arr[i - 1]) {
+                swap(arr, i, i - 1);
+                i--;
+            }
+        }
     }
 }
