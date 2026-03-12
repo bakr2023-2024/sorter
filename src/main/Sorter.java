@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Sorter {
+    public static boolean stop = false;
     public int[] sort(int[] arr, SortingAlgs alg) {
         switch (alg) {
             case SELECTION_SORT:
