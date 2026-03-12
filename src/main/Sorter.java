@@ -56,6 +56,9 @@ public class Sorter {
             case STOOGE_SORT:
                 stoogeSort(arr, 0, arr.length - 1);
                 break;
+            case ODDEVEN_SORT:
+                oddEvenSort(arr);
+                break;
             default:
                 break;
         }
@@ -360,5 +363,24 @@ public class Sorter {
             stoogeSort(arr, start + t, end);
             stoogeSort(arr, start, end - t);
         }
+    }
+
+    private void oddEvenSort(int[] arr) {
+        boolean swapped = false;
+        do {
+            swapped = false;
+            for (int i = 0; i < arr.length - 1; i += 2) {
+                if (arr[i] > arr[i + 1]) {
+                    swap(arr, i, i + 1);
+                    swapped = true;
+                }
+            }
+            for (int i = 1; i < arr.length - 1; i += 2) {
+                if (arr[i] > arr[i + 1]) {
+                    swap(arr, i, i + 1);
+                    swapped = true;
+                }
+            }
+        } while (swapped);
     }
 }
