@@ -31,7 +31,7 @@ public class Main extends Application {
     private int maxColWidth;
     private int maxColHeight;
     private double colWidth;
-
+    private Sorter sorter = new Sorter();
     public void renderArr() {
         g.setFill(Color.BLACK);
         g.fillRect(0, 0, g.getCanvas().getWidth(), g.getCanvas().getHeight());
@@ -59,7 +59,9 @@ public class Main extends Application {
         });
         Button sortBtn = new Button("Sort");
         sortBtn.setOnAction(e -> {
-
+            SortingAlgs alg = SortingAlgs.valueOf(sortAlgs.getValue());
+            sorter.sort(arr, alg);
+            Platform.runLater(this::renderArr);
         });
         VBox vbox = new VBox();
         vbox.setSpacing(5);
