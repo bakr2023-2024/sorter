@@ -37,7 +37,7 @@ public class Main extends Application {
         g.fillRect(0, 0, g.getCanvas().getWidth(), g.getCanvas().getHeight());
         g.setFill(Color.WHITE);
         for (int x = 0; x < arr.length; x++) {
-            g.fillRect(x, maxColHeight - arr[x], colWidth, arr[x]);
+            g.fillRect(x * colWidth, maxColHeight - arr[x], colWidth, arr[x]);
         }
     }
 
