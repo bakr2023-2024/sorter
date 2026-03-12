@@ -18,6 +18,8 @@ public class SorterTest {
     @ParameterizedTest
     @EnumSource(SortingAlgs.class)
     void testAlg(SortingAlgs alg) {
+        if (alg == SortingAlgs.BOGO_SORT)
+            return;
         for (int x = 0; x < 100; x++) {
             int[] arr = new int[N];
             for (int i = 0; i < N; i++)

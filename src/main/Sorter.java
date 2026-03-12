@@ -1,6 +1,7 @@
 package main;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class Sorter {
     public int[] sort(int[] arr, SortingAlgs alg) {
@@ -61,6 +62,9 @@ public class Sorter {
                 break;
             case GNOME_SORT:
                 gnomeSort(arr);
+                break;
+            case BOGO_SORT:
+                bogoSort(arr);
                 break;
             default:
                 break;
@@ -397,5 +401,23 @@ public class Sorter {
                 i--;
             }
         }
+    }
+
+    private void bogoSort(int[] arr) {
+        Random rand = new Random();
+        boolean isSorted = false;
+        do {
+            for (int i = arr.length - 1; i >= 0; i--) {
+                int r = rand.nextInt(i + 1);
+                swap(arr, i, r);
+            }
+            isSorted = true;
+            for (int i = 0; i < arr.length - 1; i++) {
+                if (arr[i] > arr[i + 1]) {
+                    isSorted = false;
+                    break;
+                }
+            }
+        } while (!isSorted);
     }
 }

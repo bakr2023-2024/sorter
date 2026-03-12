@@ -18,5 +18,5 @@ public enum SortingAlgs {
     STOOGE_SORT,
     ODDEVEN_SORT,
     GNOME_SORT,
-    // BOGO_SORT
+    BOGO_SORT
 }
