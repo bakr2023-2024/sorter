@@ -10,26 +10,37 @@ public class Sorter {
                 break;
             case BUBBLE_SORT:
                 bubbleSort(arr);
+                break;
             case INSERTION_SORT:
                 insertionSort(arr);
+                break;
             case MERGE_SORT:
                 mergeSort(arr, 0, arr.length - 1);
+                break;
             case QUICK_SORT:
                 quickSort(arr, 0, arr.length - 1);
+                break;
             case SHELL_SORT:
                 shellSort(arr);
+                break;
             case COUNT_SORT:
                 countSort(arr);
+                break;
             case RADIX_SORT:
                 radixSort(arr);
+                break;
             case HEAP_SORT:
                 heapSort(arr);
+                break;
             case COMB_SORT:
                 combSort(arr);
+                break;
             case CYCLE_SORT:
                 cycleSort(arr);
+                break;
             case COCKTAIL_SORT:
                 cocktailSort(arr);
+                break;
             case BITONIC_SORT:
                 int n = arr.length;
                 int len = (n & (n - 1)) == 0 ? n : Integer.highestOneBit(n) << 1;
@@ -38,8 +49,13 @@ public class Sorter {
                 bitonicSort(newArr, 0, len, true);
                 for (int i = 0; i < n; i++)
                     arr[i] = newArr[i];
+                break;
             case PANCAKE_SORT:
                 pancakeSort(arr);
+                break;
+            case STOOGE_SORT:
+                stoogeSort(arr, 0, arr.length - 1);
+                break;
             default:
                 break;
         }
@@ -332,6 +348,17 @@ public class Sorter {
         for (int size = arr.length; size > 1; size--) {
             flip(arr, maxIdx(arr, size));
             flip(arr, size - 1);
+        }
+    }
+
+    private void stoogeSort(int[] arr, int start, int end) {
+        if (arr[start] > arr[end])
+            swap(arr, start, end);
+        if (end - start + 1 > 2) {
+            int t = (int) Math.ceil((end - start + 1) / 3);
+            stoogeSort(arr, start, end - t);
+            stoogeSort(arr, start + t, end);
+            stoogeSort(arr, start, end - t);
         }
     }
 }
