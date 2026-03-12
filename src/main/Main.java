@@ -77,12 +77,13 @@ public class Main extends Application {
     }
     @Override
     public void start(Stage stage) throws Exception {
-        HBox main = new HBox();
+        BorderPane main = new BorderPane();
         Canvas canvas = new Canvas(width * 0.9, height);
         g = canvas.getGraphicsContext2D();
         maxColWidth = (int) canvas.getWidth();
         maxColHeight = (int) canvas.getHeight();
-        main.getChildren().addAll(canvas, getAlgControls());
+        main.setRight(getAlgControls());
+        main.setCenter(canvas);
         Scene scene = new Scene(main, width, height);
         scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
         stage.setScene(scene);
