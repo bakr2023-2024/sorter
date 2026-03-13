@@ -37,9 +37,9 @@ public class Sorter {
             case SHELL_SORT:
                 shellSort(arr);
                 break;
-            case COUNT_SORT:
-                countSort(arr);
-                break;
+            // case COUNT_SORT:
+            //     countSort(arr);
+            //     break;
             case RADIX_SORT:
                 radixSort(arr);
                 break;
@@ -49,9 +49,9 @@ public class Sorter {
             case COMB_SORT:
                 combSort(arr);
                 break;
-            case CYCLE_SORT:
-                cycleSort(arr);
-                break;
+            // case CYCLE_SORT:
+            //     cycleSort(arr);
+            //     break;
             case COCKTAIL_SORT:
                 cocktailSort(arr);
                 break;
