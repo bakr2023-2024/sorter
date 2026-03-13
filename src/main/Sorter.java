@@ -5,7 +5,6 @@ import java.util.Random;
 import java.util.function.Consumer;
 public class Sorter {
     public volatile boolean stop = false;
-
     private TriConsumer onComp = (int[] a, int i, int j) -> {
     };
     private Consumer<int[]> onSwap = (int[] a) -> {
@@ -93,6 +92,10 @@ public class Sorter {
         onSwap.accept(arr);
     }
 
+    private void compare(int[] arr, int i, int j) {
+        onComp.accept(arr, i, j);
+        Beep.play(arr[i], arr[j]);
+    }
     private int max(int[] arr) {
         int max = Integer.MIN_VALUE;
         for (int i = 0; i < arr.length; i++) {
@@ -118,7 +121,7 @@ public class Sorter {
         for (int i = 0; i < arr.length && !stop; i++) {
             int idx = i;
             for (int j = i + 1; j < arr.length && !stop; j++) {
-                onComp.accept(arr, idx, j);
+                compare(arr, idx, j);
                 if (arr[idx] > arr[j]) {
                     idx = j;
                 }
@@ -133,7 +136,7 @@ public class Sorter {
         for (int i = 0; i < arr.length && !stop; i++) {
             boolean swapped = false;
             for (int j = 0; j < arr.length - 1 - i && !stop; j++) {
-                onComp.accept(arr, j, j + 1);
+                compare(arr, j, j + 1);
                 if (arr[j] > arr[j + 1]) {
                     swap(arr, j, j + 1);
                     swapped = true;
@@ -148,7 +151,7 @@ public class Sorter {
         for (int i = 1; i < arr.length && !stop; i++) {
             int j = i;
             while (j > 0 && arr[j - 1] > arr[j] && !stop) {
-                onComp.accept(arr, j, j - 1);
+                compare(arr, j, j - 1);
                 swap(arr, j, j - 1);
                 onSwap.accept(arr);
                 j--;
@@ -167,7 +170,7 @@ public class Sorter {
             b[i] = arr[m + i + 1];
         int i = 0, j = 0, k = s;
         while (i < l1 && j < l2 && !stop) {
-            onComp.accept(arr, s + i, m + j + 1);
+            compare(arr, s + i, m + j + 1);
             if (a[i] <= b[j])
                 arr[k++] = a[i++];
             else
@@ -199,7 +202,7 @@ public class Sorter {
         for (int j = s; j < e && !stop; j++) {
             if (stop)
                 return 0;
-            onComp.accept(arr, e, j);
+            compare(arr, e, j);
             if (arr[j] < pivot) {
                 i++;
                 swap(arr, i, j);
@@ -224,7 +227,7 @@ public class Sorter {
                 int j = i;
                 int curr = arr[j];
                 while ((j - gap) >= 0 && arr[j - gap] > curr && !stop) {
-                    onComp.accept(arr, j, j - gap);
+                    compare(arr, j, j - gap);
                     swap(arr, j, j - gap);
                     j -= gap;
                 }
@@ -265,6 +268,7 @@ public class Sorter {
         }
         for (int i = 0; i < arr.length && !stop; i++) {
             arr[i] = ans[i];
+            Beep.play(arr[i], ans[i]);
             onSwap.accept(arr);
         }
     }
@@ -281,12 +285,12 @@ public class Sorter {
         int largest = i;
         int l = i * 2 + 1, r = i * 2 + 2;
         if (l < n) {
-            onComp.accept(arr, largest, l);
+            compare(arr, largest, l);
             if (arr[largest] < arr[l])
             largest = l;
     }
     if (r < n) {
-        onComp.accept(arr, largest, r);
+        compare(arr, largest, r);
         if (arr[largest] < arr[r])
             largest = r;
     }
@@ -314,7 +318,7 @@ public class Sorter {
             if (gap < 1)
                 gap = 1;
             for (int i = 0; i + gap < arr.length && !stop; i++) {
-                onComp.accept(arr, i, i + gap);
+                compare(arr, i, i + gap);
                 if (arr[i] > arr[i + gap]) {
                     swap(arr, i, i + gap);
                     swapped = true;
@@ -349,15 +353,15 @@ public class Sorter {
     private void cocktailSort(int[] arr) {
         for (int i = 0; i < arr.length && !stop; i++) {
             boolean swapped = false;
-            for (int j = 0; j < arr.length - 1 - i && !stop; j++) {
-                onComp.accept(arr, j, j + 1);
+            for (int j = i; j < arr.length - 1 - i && !stop; j++) {
+                compare(arr, j, j + 1);
                 if (arr[j] > arr[j + 1]) {
                     swap(arr, j, j + 1);
                     swapped = true;
                 }
             }
-            for (int j = arr.length - 1 - i; j > 0 && !stop; j--) {
-                onComp.accept(arr, j, j - 1);
+            for (int j = arr.length - 1 - i; j > i && !stop; j--) {
+                compare(arr, j, j - 1);
                 if (arr[j] < arr[j - 1]) {
                     swap(arr, j, j - 1);
                     swapped = true;
@@ -372,7 +376,7 @@ public class Sorter {
         if (count > 1 && !stop) {
             int k = count / 2;
             for (int i = start; i < start + k && !stop; i++) {
-                onComp.accept(arr, i, i + k);
+                compare(arr, i, i + k);
                 if (asc == (arr[i] > arr[i + k]))
                     swap(arr, i, i + k);
             }
@@ -398,7 +402,7 @@ public class Sorter {
     private void pancakeSort(int[] arr) {
         for (int size = arr.length; size > 1 && !stop; size--) {
             int idx = maxIdx(arr, size);
-            onComp.accept(arr, idx, idx);
+            compare(arr, idx, idx);
             flip(arr, idx);
             flip(arr, size - 1);
         }
@@ -407,7 +411,7 @@ public class Sorter {
     private void stoogeSort(int[] arr, int start, int end) {
         if (stop)
             return;
-        onComp.accept(arr, start, end);
+        compare(arr, start, end);
         if (arr[start] > arr[end])
             swap(arr, start, end);
         if (end - start + 1 > 2) {
@@ -423,14 +427,14 @@ public class Sorter {
         do {
             swapped = false;
             for (int i = 0; i < arr.length - 1 && !stop; i += 2) {
-                onComp.accept(arr, i, i + 1);
+                compare(arr, i, i + 1);
                 if (arr[i] > arr[i + 1]) {
                     swap(arr, i, i + 1);
                     swapped = true;
                 }
             }
             for (int i = 1; i < arr.length - 1 && !stop; i += 2) {
-                onComp.accept(arr, i, i + 1);
+                compare(arr, i, i + 1);
                 if (arr[i] > arr[i + 1]) {
                     swap(arr, i, i + 1);
                     swapped = true;
@@ -446,7 +450,7 @@ public class Sorter {
                 i++;
                 continue;
             }
-            onComp.accept(arr, i, i - 1);
+            compare(arr, i, i - 1);
             if (arr[i] >= arr[i - 1]) {
                 i++;
             } else {
@@ -467,7 +471,7 @@ public class Sorter {
             }
             isSorted = true;
             for (int i = 0; i < arr.length - 1 && !stop; i++) {
-                onComp.accept(arr, i, i + 1);
+                compare(arr, i, i + 1);
                 if (arr[i] > arr[i + 1]) {
                     isSorted = false;
                     break;

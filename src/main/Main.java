@@ -75,8 +75,12 @@ public class Main extends Application {
             sortAlgs.getItems().add(alg.toString());
         sortAlgs.setValue(SortingAlgs.SELECTION_SORT.toString());
         Button genBtn = new Button("Generate");
+        Button sortBtn = new Button("Sort");
+        Button stopBtn = new Button("Stop");
+        sortBtn.setDisable(true);
         genBtn.setOnAction(e -> {
             genBtn.setDisable(true);
+            sortBtn.setDisable(true);
             Random r = new Random();
             arr = new int[arraySizeSpinner.getValue()];
             colWidth = g.getCanvas().getWidth() / arr.length;
@@ -85,9 +89,9 @@ public class Main extends Application {
             Platform.runLater(() -> {
                 renderArr(arr);
                 genBtn.setDisable(false);
+                sortBtn.setDisable(false);
             });
         });
-        Button sortBtn = new Button("Sort");
         sortBtn.setOnAction(e -> {
             sorter.stop = false;
             sortBtn.setDisable(true);
@@ -99,7 +103,6 @@ public class Main extends Application {
             });
             sortThread.start();
         });
-        Button stopBtn = new Button("Stop");
         stopBtn.setOnAction(e -> {
             if (sortThread != null) {
                 sorter.stop = true;
@@ -117,7 +120,7 @@ public class Main extends Application {
                 genBtn,
                 new Label("Sorting Algorithms"),
                 sortAlgs,
-                new Label("Delay"),
+                new Label("Delay (ms)"),
                 delaySpinner,
                 sortBtn, stopBtn);
         return vbox;
