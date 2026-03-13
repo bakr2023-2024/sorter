@@ -13,7 +13,7 @@ import main.SortingAlgs;
 public class SorterTest {
     private final int N = 100;
     private final Random rand = new Random();
-    private final Sorter sorter = new Sorter();
+    private final Sorter sorter = new Sorter(null, null);
 
     @ParameterizedTest
     @EnumSource(SortingAlgs.class)
