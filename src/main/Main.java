@@ -137,7 +137,7 @@ public class Main extends Application {
         main.setRight(getAlgControls());
         main.setCenter(canvas);
         Scene scene = new Scene(main, width, height);
-        scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
         stage.setScene(scene);
         stage.setTitle("Sorter");
         stage.show();
